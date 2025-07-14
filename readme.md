@@ -1,138 +1,165 @@
-Table of Contents
+# 🔍 GitHub Repository Search Application
 
-    Features
+A responsive and user-friendly web app to search GitHub repositories using keywords, filters, and pagination. Built with **Next.js**, **React**, and **Sass**.
 
-    Technical Specifications
+---
 
-    User Experience
+## 📚 Table of Contents
 
-    Getting Started
+- [✨ Features](#-features)
+- [🛠 Technical Specifications](#-technical-specifications)
+- [🎯 User Experience](#-user-experience)
+- [🚀 Getting Started](#-getting-started)
+  - [📦 Prerequisites](#-prerequisites)
+  - [🔧 Installation](#-installation)
+  - [▶️ Running the Application](#️-running-the-application)
+- [🔌 API Reference](#-api-reference)
+- [⚠️ Error Handling & Loading States](#️-error-handling--loading-states)
+- [🎨 Styling](#-styling)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
-        Prerequisites
+---
 
-        Installation
+## ✨ Features
 
-        Running the Application
+- 🔍 **Repository Search**: Search for GitHub repositories by keywords.
+- 📄 **Paginated Results**: Browse results with intuitive pagination controls.
+- 🎛 **Filter Options**: Filter by:
+  - Programming language
+  - Star count (e.g., `>500`)
+  - Created date (calendar input)
+- ⏱ **Search Debouncing**: Optimizes API requests while typing.
+- 📱 **Responsive Design**: Optimized for mobile, tablet, and desktop.
+- 🔗 **URL State Management**: Filter and search states are preserved in URL parameters.
 
-    API Reference
+---
 
-    Error Handling & Loading States
+## 🛠 Technical Specifications
 
-    Styling
+- **Framework**: [Next.js](https://nextjs.org/) with React.js
+- **Routing**: Uses Next.js built-in routing system
+- **Styling**: [Sass](https://sass-lang.com/) with CSS Modules
+- **API**: GitHub Search REST API (no authentication required)
+- **Base API URL**:  
+  `https://api.github.com/search/repositories`
 
-    Contributing
+---
 
-    License
+## 🎯 User Experience
 
-Features
+- 📦 Displays essential details:
+  - Repository name
+  - Description
+  - Star count
+  - Language
+- 🚫 Graceful empty states when no results are found
+- ⏳ Loading spinners while fetching data
+- 🔄 Clear pagination with page indicators
+- 🧹 Reset button to clear all filters and reset pagination
 
-    Repository Search: Search for GitHub repositories by keywords.
+---
 
-    Paginated Results: Browse through results with clear pagination controls.
+## 🚀 Getting Started
 
-    Filter Options: Refine search results using a minimum of three filter options (e.g., language, stars, created date).
+### 📦 Prerequisites
 
-    Search Debouncing: Optimized API calls to prevent excessive requests while typing.
+Ensure you have the following installed:
 
-    Responsive Design: Seamless experience across various devices, from mobile to desktop.
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- npm or [Yarn](https://yarnpkg.com/)
 
-    URL State Management: Search queries and filter selections are reflected in URL parameters for shareability and persistence.
+### 🔧 Installation
 
-Technical Specifications
-
-    Framework: React.js with Next.js for routing and server-side rendering/static site generation capabilities.
-
-    Styling: Direct Sass (Syntactically Awesome Style Sheets) for a maintainable and scalable styling solution.
-
-    API Integration: Integrates with the GitHub Search REST API.
-
-    Authentication: No authentication required as the GitHub API allows unauthenticated search requests.
-
-    Base API URL: https://api.github.com/search/repositories
-
-User Experience
-
-    Meaningful Information: Displays essential repository details such as name, description, stars, and language.
-
-    Empty States: Provides clear messages when no search results are found.
-
-    Loading Indicators: Shows appropriate loading states during API calls to inform the user.
-
-    Intuitive Pagination: Easy-to-use controls for navigating through search result pages.
-
-Getting Started
-
-Follow these instructions to get a copy of the project up and running on your local machine.
-
-Prerequisites
-
-Make sure you have Node.js and npm (or yarn) installed on your system.
-
-    Node.js (LTS version recommended)
-
-    npm or yarn
-
-Installation
-
-    Clone the repository:
-    Bash
-
-git clone git@github.com:ShahTufail/search-github-repo.git
+```bash
+git clone https://github.com/ShahTufail/search-github-repo.git
 cd search-github-repo
+npm install
+# or
+yarn install
 
-
-Install dependencies:
-Bash
-
-    npm install
-    # or
-    yarn install
-
-Running the Application
-
-To start the development server:
-Bash
+▶️ Running the Application
 
 npm run dev
 # or
 yarn dev
 
-Open http://localhost:3000 in your browser to see the application.
+Visit http://localhost:3000 in your browser.
+🔌 API Reference
 
-API Reference
+This app integrates with:
 
-This application uses the GitHub Search Repositories API.
+    GitHub Search Repositories API
+    🔗 GitHub REST Docs
 
-The base URL for API requests is: https://api.github.com/search/repositories
+Example Request:
 
-Error Handling & Loading States
+GET https://api.github.com/search/repositories?q=react+language:javascript&sort=stars&order=desc&page=1&per_page=10
 
-The application is designed to:
+Query Parameters:
 
-    Display user-friendly error messages if API requests fail (e.g., network issues, rate limiting).
+    q: search query with filters (e.g., react stars:>1000)
 
-    Show clear loading indicators to inform the user when data is being fetched from the API.
+    sort: stars, updated, etc.
 
-Styling
+    order: desc or asc
 
-This project uses Sass for styling. All .scss files are organized and compiled to provide a clean and modular CSS structure. You can find the styles within the appropriate directories (e.g., styles/).
+    page: pagination number
 
-Contributing
+    per_page: results per page (max 100)
 
-Contributions are always welcome! If you have suggestions for improvements or find a bug, please feel free to:
+⚠️ Error Handling & Loading States
 
-    Fork the repository.
+    API failures (e.g., rate limits, network errors) show user-friendly messages
 
-    Create a new branch (git checkout -b feature/your-feature-name).
+    Loading states are visually indicated with spinners or placeholders
 
-    Make your changes.
+    Empty states show when no results match the filters
 
-    Commit your changes (git commit -m 'Add some feature').
+🎨 Styling
 
-    Push to the branch (git push origin feature/your-feature-name).
+This project uses Sass + CSS Modules for modular and maintainable styles.
 
-    Open a Pull Request.
+📁 Key Style Files:
 
-License
+    styles/globals.scss: global base styles
 
-This project is open-source and available under the MIT License.
+    styles/Filters.module.scss: filter form card styles
+
+    styles/Pagination.module.scss: pagination button styles
+
+✨ Features:
+
+    Shadowed cards
+
+    Responsive layout using Flexbox
+
+    Styled input elements and buttons
+
+    Custom pagination styling with active state
+
+🤝 Contributing
+
+Contributions are welcome!
+Steps
+
+# 1. Fork the repository
+# 2. Create a feature branch
+git checkout -b feature/your-feature-name
+
+# 3. Commit your changes
+git commit -m "Add some feature"
+
+# 4. Push to your branch
+git push origin feature/your-feature-name
+
+# 5. Open a Pull Request on GitHub
+
+📄 License
+
+This project is open-source under the MIT License.
+
+
+---
+
+Would you like this saved and included in the zipped folder as a `README.md` file?  
