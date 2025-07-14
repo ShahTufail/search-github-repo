@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const fetchRepositories = async (query: string) => {
   try {
@@ -6,11 +7,12 @@ export const fetchRepositories = async (query: string) => {
     return response.data;
   } catch (error: any) {
     if (error.response) {
-      throw new Error(error.response.data.message || "GitHub API error");
+      toast.error(error.response.data.message || "GitHub API error");
     } else if (error.request) {
-      throw new Error("No response from GitHub API");
+      toast.error("No response from GitHub API");
     } else {
-      throw new Error("Unexpected error");
+      toast.error("Unexpected error");
     }
+    throw error;
   }
-}
+};

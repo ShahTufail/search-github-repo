@@ -8,6 +8,15 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   padding: 1rem;
+  .header {
+    max-width: 65%;
+    margin: 20px auto;
+    padding: 24px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+  }
 }
 .search-box {
   display: flex;

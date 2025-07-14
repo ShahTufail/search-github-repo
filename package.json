@@ -10,17 +10,19 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "react-datepicker": "^4.24.0",
     "date-fns": "^2.30.0",
     "next": "14.1.4",
     "react": "18.2.0",
+    "react-datepicker": "^4.25.0",
     "react-dom": "18.2.0",
+    "react-toastify": "^11.0.5",
     "sass": "^1.73.0"
   },
   "devDependencies": {
     "@types/node": "20.10.5",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
+    "eslint": "^9.31.0",
     "typescript": "5.3.3"
   }
 }
