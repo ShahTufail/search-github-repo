@@ -8,8 +8,8 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   padding: 1rem;
-  .header {
-    max-width: 65%;
+  .all-cards {
+    max-width: 75%;
     margin: 20px auto;
     padding: 24px;
     background: #fff;
@@ -17,6 +17,15 @@ body {
     border-radius: 10px;
     text-align: center;
   }
+  // .header {
+  //   max-width: 75%;
+  //   margin: 20px auto;
+  //   padding: 24px;
+  //   background: #fff;
+  //   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  //   border-radius: 10px;
+  //   text-align: center;
+  // }
 }
 .search-box {
   display: flex;
@@ -29,10 +38,13 @@ input, select {
 }
 .card {
   background: white;
+  margin: 0 auto;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  text-align:justify;
+
 }
 .pagination {
   display: flex;

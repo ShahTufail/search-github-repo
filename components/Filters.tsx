@@ -30,7 +30,7 @@ const Filters = ({ filters, setFilters, resetFilters }: any) => {
 
   return (
     <div className={styles.card}>
-      <h2>Search and Filter</h2>
+      <h2>Filter</h2>
       <div className={styles.inputs}>
         <select
           value={filters.language}
@@ -43,9 +43,9 @@ const Filters = ({ filters, setFilters, resetFilters }: any) => {
         </select>
 
         <input
-          type="text"
-          placeholder="Stars (e.g., >1000)"
-          value={filters.stars}
+          type="Number"
+          placeholder="Minimum Stars"
+          value={filters.stargazers_count}
           onChange={(e) => setFilters((prev: any) => ({ ...prev, stars: e.target.value }))}
         />
 
@@ -58,6 +58,10 @@ const Filters = ({ filters, setFilters, resetFilters }: any) => {
               created: date ? `>${date.toISOString().split("T")[0]}` : ""
             }));
           }}
+          showYearDropdown 
+          scrollableYearDropdown 
+          scrollableMonthYearDropdown
+          yearDropdownItemNumber={15}
           placeholderText="Created after"
           dateFormat="yyyy-MM-dd"
           isClearable

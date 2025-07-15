@@ -5,6 +5,7 @@ import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
 import { useDebounce } from "../hooks/useDebounce";
 import { fetchRepositories } from "../utils/fetchRepos";
+import buildQueryString from "../utils/buildQueryString";
 // import "../styles/globals.scss";
 
 export default function Home() {
@@ -40,12 +41,13 @@ export default function Home() {
       try {
         setLoading(true);
         setError("");
-        const q = [
-          debouncedQuery,
-          filters.language && `language:${filters.language}`,
-          filters.stars,
-          filters.created,
-        ].filter(Boolean).join(" ");
+        // const q = [
+        //   debouncedQuery,
+        //   filters.language && `language:${filters.language}`,
+        //   filters.stars,
+        //   filters.created,
+        // ].filter(Boolean).join(" ");
+        const q = buildQueryString(debouncedQuery, filters);
         const response = await fetchRepositories(`?q=${encodeURIComponent(q)}&sort=stars&order=desc&page=${page}&per_page=${perPage}`);
         setRepos(response.items || []);
         setCount(response.total_count || 0);
@@ -70,32 +72,32 @@ export default function Home() {
 
   return (
     <div className="container">
-      <div className="header">
-      <h1>GitHub Repository Search</h1>
-      <input
-        type="text"
-        placeholder="🔍 Search Repository ..."
-        value={query}
-        style={{background: "lightgray", padding: "10px", borderRadius: "5px"}}
-        onChange={e => setQuery(e.target.value)}
-        
-      />
+      <div className="all-cards">
+        <h1>GitHub Repository Search</h1>
+        <input
+          type="text"
+          placeholder="🔍 Search Repository ..."
+          value={query}
+          style={{padding: "10px", borderRadius: "5px"}}
+          onChange={e => setQuery(e.target.value)}
+          
+        />
+        <Filters filters={filters} setFilters={setFilters} resetFilters={resetFilters} />
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+        {/* {!loading && repos.length === 0 && <p>No results found.</p>} */}
+        {!loading && 
+          <RepositoryCard data={repos} />
+        }
+        {repos.length > 0 && <Pagination
+          currentPage={page}
+          totalPages={Math.ceil(Number(count / perPage))}
+          onPageChange={(newPage) => {
+            setPage(newPage);
+            router.push(`/?page=${newPage}`, undefined, { shallow: true });
+          }}
+        />}
       </div>
-      <Filters filters={filters} setFilters={setFilters} resetFilters={resetFilters} />
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {!loading && repos.length === 0 && <p>No results found.</p>}
-      {!loading && repos.map((repo: any) => (
-        <RepositoryCard key={repo.id} repo={repo} />
-      ))}
-      {repos.length > 0 && <Pagination
-        currentPage={page}
-        totalPages={Math.ceil(Number(count / perPage))}
-        onPageChange={(newPage) => {
-          setPage(newPage);
-          router.push(`/?page=${newPage}`, undefined, { shallow: true });
-        }}
-/>}
     </div>
   );
 }
