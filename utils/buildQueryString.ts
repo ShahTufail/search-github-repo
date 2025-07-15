@@ -5,21 +5,15 @@ const buildQueryString = (
     stars?: string | string[];
     created?: string | string[];
   }
-) => {
-  let query = keyword ? `${keyword}` : "";
+): string => {
+  const queryParts = [];
 
-  if (filters.language) {
-    query += `+language:${filters.language}`;
-  }
+  if (keyword) queryParts.push(keyword);
+  if (filters.language) queryParts.push(`language:${filters.language}`);
+  if (filters.stars) queryParts.push(`stars:>=${filters.stars}`);
+  if (filters.created) queryParts.push(`created:>=${filters.created}`);
 
-  if (filters) {
-    query += `+stars:>=${filters.stars}`;
-  }
-
-  if (filters) {
-    query += `+created:>=${filters.created}`;
-  }
-
-  return query;
+  return queryParts.join(" ");
 };
+
 export default buildQueryString;

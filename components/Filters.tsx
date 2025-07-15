@@ -3,10 +3,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import styles from "../styles/Filters.module.scss";
+import { useDebounce } from "../hooks/useDebounce";
 
 const Filters = ({ filters, setFilters, resetFilters }: any) => {
   const [languages, setLanguages] = useState<string[]>([]);
   const [date, setDate] = useState<Date | null>(null);
+  const [tempStars, setTempStars] = useState(filters.stars);
+  const debouncedStars = useDebounce(tempStars, 500);
 
   useEffect(() => {
     const fetchLanguages = async () => {
@@ -28,6 +31,10 @@ const Filters = ({ filters, setFilters, resetFilters }: any) => {
     setDate(null);
   };
 
+  useEffect(() => {
+  setFilters((prev: any) => ({ ...prev, stars: debouncedStars }));
+}, [debouncedStars]);
+
   return (
     <div className={styles.card}>
       <h2>Filter</h2>
@@ -42,11 +49,19 @@ const Filters = ({ filters, setFilters, resetFilters }: any) => {
           ))}
         </select>
 
-        <input
-          type="Number"
+        {/* <input
+          type="number"
           placeholder="Minimum Stars"
           value={filters.stargazers_count}
-          onChange={(e) => setFilters((prev: any) => ({ ...prev, stars: e.target.value }))}
+          onChange={(e) =>
+            setFilters((prev: any) => ({ ...prev, stargazers_count: e.target.value }))
+          }
+        /> */}
+        <input
+          type="number"
+          placeholder="Minimum Stars"
+          value={tempStars}
+          onChange={(e) => setTempStars(e.target.value)}
         />
 
         <DatePicker
@@ -55,11 +70,11 @@ const Filters = ({ filters, setFilters, resetFilters }: any) => {
             setDate(date);
             setFilters((prev: any) => ({
               ...prev,
-              created: date ? `>${date.toISOString().split("T")[0]}` : ""
+              created: date ? date.toISOString().split("T")[0] : "",
             }));
           }}
-          showYearDropdown 
-          scrollableYearDropdown 
+          showYearDropdown
+          scrollableYearDropdown
           scrollableMonthYearDropdown
           yearDropdownItemNumber={15}
           placeholderText="Created after"
