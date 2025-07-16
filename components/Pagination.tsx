@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../styles/Pagination.module.scss";
 
 interface PaginationProps {
   currentPage: number;
@@ -26,30 +25,50 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
   };
 
   return (
-    <div className={styles.paginationContainer}>
-      <p>
+    <nav
+      className="flex flex-col items-center mt-6"
+      aria-label="Pagination Navigation"
+      role="navigation"
+    >
+      <p className="mb-2" aria-live="polite">
         Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong>
       </p>
-      <div className={styles.pageButtons}>
-        <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage <= 1}>
+      <div className="flex gap-1" role="group" aria-label="Pagination Buttons">
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage <= 1}
+          className="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50"
+          aria-label="Previous page"
+        >
           &laquo;
         </button>
 
         {createPageNumbers().map((page) => (
           <button
             key={page}
-            className={page === currentPage ? styles.active : ""}
+            className={`px-3 py-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+              page === currentPage
+                ? "bg-blue-500 text-white font-bold"
+                : "bg-white hover:bg-gray-100"
+            }`}
             onClick={() => onPageChange(page)}
+            aria-current={page === currentPage ? "page" : undefined}
+            aria-label={`Go to page ${page}`}
           >
             {page}
           </button>
         ))}
 
-        <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage >= totalPages}>
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+          className="px-3 py-1 rounded border border-gray-300 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50"
+          aria-label="Next page"
+        >
           &raquo;
         </button>
       </div>
-    </div>
+    </nav>
   );
 };
 
