@@ -151,17 +151,17 @@ This project uses **Tailwind CSS** for all styling.
 Contributions are welcome!
 Steps
 
-# 1. Fork the repository
-# 2. Create a feature branch
+1. Fork the repository
+2. Create a feature branch
 git checkout -b feature/your-feature-name
 
-# 3. Commit your changes
+3. Commit your changes
 git commit -m "Add some feature"
 
-# 4. Push to your branch
+4. Push to your branch
 git push origin feature/your-feature-name
 
-# 5. Open a Pull Request on GitHub
+5. Open a Pull Request on GitHub
 
 📄 License
 
@@ -169,5 +169,3 @@ This project is open-source under the MIT License.
 
 
 ---
-
-Would you like this saved and included in the zipped folder as a `README.md` file?
