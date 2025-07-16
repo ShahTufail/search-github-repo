@@ -6,60 +6,7 @@ import { useRouter } from "next/router";
 import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
 import RepositoryCard from "../components/RepositoryCard";
-import { create } from "zustand";
-
-type FiltersType = {
-  language: string;
-  stars: string;
-  created: string;
-};
-
-type RepoStore = {
-  query: string;
-  setQuery: (q: string) => void;
-  filters: FiltersType;
-  setFilters: (f: Partial<FiltersType>) => void;
-  repos: any[];
-  setRepos: (repos: any[]) => void;
-  count: number;
-  setCount: (c: number) => void;
-  loading: boolean;
-  setLoading: (l: boolean) => void;
-  error: string;
-  setError: (e: string) => void;
-  page: number;
-  setPage: (p: number) => void;
-  cache: Map<string, any>;
-  reset: () => void;
-};
-
-export const useRepoStore = create<RepoStore>((set, get) => ({
-  query: "",
-  setQuery: (q) => set({ query: q }),
-  filters: { language: "", stars: "", created: "" },
-  setFilters: (f) => set({ filters: { ...get().filters, ...f } }),
-  repos: [],
-  setRepos: (repos) => set({ repos }),
-  count: 0,
-  setCount: (c) => set({ count: c }),
-  loading: false,
-  setLoading: (l) => set({ loading: l }),
-  error: "",
-  setError: (e) => set({ error: e }),
-  page: 1,
-  setPage: (p) => set({ page: p }),
-  cache: new Map(),
-  reset: () =>
-    set({
-      query: "",
-      filters: { language: "", stars: "", created: "" },
-      repos: [],
-      count: 0,
-      loading: false,
-      error: "",
-      page: 1,
-    }),
-}));
+import { useRepoStore } from "../utils/repoStore";
 
 export default function Home() {
   const router = useRouter();
@@ -222,7 +169,7 @@ export default function Home() {
                 Start typing to search for the repo(s)</span>
               </div>
             )}
-            {/* Show no repositories found as a card */}
+            {/* No repositories found card */}
             {hasSearchParams && !loading && !error && repos.length === 0 && (
               <div className="mt-4 mb-4 p-4 rounded-lg bg-yellow-50 border border-yellow-200 text-yellow-700 shadow flex items-center gap-3" role="status">
                 <svg className="w-6 h-6 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
@@ -231,7 +178,7 @@ export default function Home() {
                 <span>No repositories found.</span>
               </div>
             )}
-            {/* Show results */}
+            {/* Repos has value */}
             {repos.length > 0 && <RepositoryCard data={repos} />}
           </div>
           {loading && (

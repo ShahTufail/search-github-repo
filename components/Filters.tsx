@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from "../hooks/useDebounce";
-import { useRepoStore } from "../pages/index"; // Import the zustand store
+import { useRepoStore } from "../utils/repoStore";
 
 const Filters = () => {
   const {
