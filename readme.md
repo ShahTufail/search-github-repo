@@ -39,7 +39,7 @@ A responsive and user-friendly web app to search GitHub repositories using keywo
 
 - **Framework**: [Next.js](https://nextjs.org/) with React.js
 - **Routing**: Uses Next.js built-in routing system
-- **Styling**: [Sass](https://sass-lang.com/) with CSS Modules
+- **Styling**: [Tailwind]()
 - **API**: GitHub Search REST API (no authentication required)
 - **Base API URL**:  
   `https://api.github.com/search/repositories`
@@ -118,7 +118,7 @@ Query Parameters:
 
 🎨 Styling
 
-This project uses Sass + CSS Modules for modular and maintainable styles.
+This project uses Tailwind CSS for fast and easy styling
 
 📁 Key Style Files:
 
