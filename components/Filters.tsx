@@ -24,7 +24,6 @@ const Filters = () => {
         );
         setLanguages(langs);
       } catch {
-        // Toast handled in fetchRepositories
       }
     };
     fetchLanguages();

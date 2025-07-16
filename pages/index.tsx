@@ -99,7 +99,6 @@ export default function Home() {
     if (filters.language) searchParams.set("language", filters.language);
     if (filters.stars) searchParams.set("stars", filters.stars);
     if (filters.created) searchParams.set("created", filters.created);
-    // Only add page if there are other params
     if (searchParams.toString()) {
       searchParams.set("page", String(page));
       router.push(`/?${searchParams.toString()}`, undefined, { shallow: true });
@@ -109,7 +108,6 @@ export default function Home() {
   }, [debouncedQuery, filters, page]);
 
   useEffect(() => {
-    // Don't fetch if no search params (on load or after reset)
     if (!hasSearchParams) {
       setRepos([]);
       setCount(0);
